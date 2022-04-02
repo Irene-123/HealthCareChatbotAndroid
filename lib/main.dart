@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_care_chatbot/screens/homePage.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,4 +18,16 @@ class MyApp extends StatelessWidget {
       home: HomePage(),
     );
   }
-}
+
+
+
+
+
+
+
+
+  final databaseRef = FirebaseDatabase.instance; //database reference object
+
+  private DatabaseReference mDatabase;
+// ...
+  mDatabase = FirebaseDatabase.getInstance().getReference();

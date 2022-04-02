@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "403383188363",
+    "project_id": "healthcarechatbot-a8a33",
+    "storage_bucket": "healthcarechatbot-a8a33.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:403383188363:android:27da9be8aa20dfaeff8d8e",
+        "android_client_info": {
+          "package_name": "com.example.health_care_chatbot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "403383188363-d8di8a5fb6rlr30uf1guq4ctfpoa8nah.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAX72DPSakSNesMgzVnvabc0XeBGkthNTA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "403383188363-d8di8a5fb6rlr30uf1guq4ctfpoa8nah.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
