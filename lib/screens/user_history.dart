@@ -12,7 +12,7 @@ class _UserHistoryState extends State<UserHistory> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("History"),
+        title: const Text("History"),
       ),
       body: Container(),
     );

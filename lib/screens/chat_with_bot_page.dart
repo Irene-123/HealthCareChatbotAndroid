@@ -12,7 +12,7 @@ class _ChatWithBotPageState extends State<ChatWithBotPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("HealthCare Assistant"),
+        title: const Text("HealthCare Assistant"),
       ),
       body: Container(),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:health_care_chatbot/screens/chatWithBotPage.dart';
-import 'package:health_care_chatbot/screens/userHistory.dart';
-import 'package:health_care_chatbot/screens/userProfile.dart';
+import 'package:health_care_chatbot/screens/chat_with_bot_page.dart';
+import 'package:health_care_chatbot/screens/user_history.dart';
+import 'package:health_care_chatbot/screens/user_profile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,9 +13,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
   final List _children = [
-    UserProfile(),
-    ChatWithBotPage(),
-    UserHistory()
+    const UserProfile(),
+    const ChatWithBotPage(),
+    const UserHistory()
   ];
   @override
   Widget build(BuildContext context) {
@@ -26,10 +26,10 @@ class _HomePageState extends State<HomePage> {
         currentIndex: _currentIndex,
         selectedItemColor: Colors.red,
         unselectedItemColor: Colors.grey.shade600,
-        selectedLabelStyle: TextStyle(fontWeight: FontWeight.w600),
-        unselectedLabelStyle: TextStyle(fontWeight: FontWeight.w600),
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600),
+        unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600),
         type: BottomNavigationBarType.fixed,
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.account_box),
             label: "Profile",
