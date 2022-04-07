@@ -27,8 +27,8 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
 
     DatabaseReference ref = dbRef.ref("username/1");
-    print(ref.key);
-    print(ref.parent!.key);
+    // print(ref.key);
+    // print(ref.parent!.key);
     ref.remove();
 
     return const MaterialApp(

@@ -13,6 +13,7 @@ class _UserHistoryState extends State<UserHistory> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("History"),
+        backgroundColor: Colors.redAccent,
       ),
       body: Container(),
     );
