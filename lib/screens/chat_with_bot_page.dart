@@ -19,7 +19,6 @@ class _ChatWithBotPageState extends State<ChatWithBotPage> {
     ChatMessage(messageContent: "How have you been?", messageType: "receiver"),
     ChatMessage(messageContent: "Hey Kriss, I am doing fine dude. wbu?", messageType: "sender"),
     ChatMessage(messageContent: "ehhhh, doing OK.", messageType: "receiver"),
-    ChatMessage(messageContent: "Is there any thing wrong?", messageType: "sender"),
   ];
   final textBoxController = TextEditingController();
   final ScrollController _controller = ScrollController();
