@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ffi';
 import "package:flutter/material.dart";
 import '../models/chatMessageModel.dart';
 import 'package:health_care_chatbot/function.dart';
@@ -19,14 +20,11 @@ class _ChatWithBotPageState extends State<ChatWithBotPage> {
     ChatMessage(messageContent: "Hey Kriss, I am doing fine dude. wbu?", messageType: "sender"),
     ChatMessage(messageContent: "ehhhh, doing OK.", messageType: "receiver"),
     ChatMessage(messageContent: "Is there any thing wrong?", messageType: "sender"),
-    ChatMessage(messageContent: "Is there any thing wrong?", messageType: "sender"),
-    ChatMessage(messageContent: "Is there any thing wrong?", messageType: "sender"),
   ];
   final textBoxController = TextEditingController();
   final ScrollController _controller = ScrollController();
-   String url = 'http://10.0.2.2:5000/api?query=';
-  var data;
-  String output = 'Initial Output';
+  String url = 'http://10.0.2.2:5000/api?query=';
+  // String output = 'Initial Output';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,40 +125,15 @@ class _ChatWithBotPageState extends State<ChatWithBotPage> {
                           border: InputBorder.none
                       ),
                       textInputAction: TextInputAction.send,
-                      onSubmitted: (msg){
-                        output=this._getResponse();
-                      },
+                      onSubmitted: (msg) {
+                        _addMessage();
+                      }
                     ),
                   ),
                   const SizedBox(width: 15,),
                   FloatingActionButton(
                     onPressed: (){
-                      setState(() {
-                        messages.add(
-                            ChatMessage(
-                                messageContent: textBoxController.text,
-                                messageType: "sender"
-                            )
-                        );
-                        Timer(
-                            Duration(milliseconds: 300),
-                                () => _controller
-                                .jumpTo(_controller.position.maxScrollExtent));
-                      });
-                      setState(() {
-                        messages.add(
-                            ChatMessage(
-                                messageContent: output,
-                                messageType: "receiver"
-                            )
-                        );
-                        Timer(
-                            Duration(milliseconds: 300),
-                                () => _controller
-                                .jumpTo(_controller.position.maxScrollExtent));
-                      });
-
-                      textBoxController.clear();
+                      _addMessage();
                     },
                     child: const Icon(Icons.send,color: Colors.white,size: 18,),
                     backgroundColor: Colors.redAccent ,
@@ -175,13 +148,14 @@ class _ChatWithBotPageState extends State<ChatWithBotPage> {
     );
   }
 
-  String _getResponse(){
-    if (textBoxController.text.length>0){
-      data= textBoxController.text;
-      url = 'http://10.0.2.2:5000/api?query=' + data.toString();
-      data =  fetchdata(url);
+  Future<String> _getResponse() async {
+    String textData = textBoxController.text;
+    url = 'http://10.0.2.2:5000/api?query=' + textData.toString();
+    String data = "";
+    data = await fetchdata(url);
+    if(data != "") {
       var decoded = jsonDecode(data);
-      output = decoded['output'];
+      String output = decoded['output'];
       setState(() {
         messages.add(
             ChatMessage(
@@ -189,11 +163,35 @@ class _ChatWithBotPageState extends State<ChatWithBotPage> {
                 messageType: "receiver"
             )
         );
+        Timer(
+            const Duration(milliseconds: 300),
+                () =>
+                _controller
+                    .jumpTo(_controller.position.maxScrollExtent));
       });
+      return "Done";
     }
-    return output;
+    return "Not Done";
   }
 
+  String _addMessage() {
+    setState(() {
+      messages.add(
+          ChatMessage(
+              messageContent: textBoxController.text,
+              messageType: "sender"
+          )
+      );
+      textBoxController.clear();
+      Timer(
+          const Duration(milliseconds: 300),
+              () =>
+              _controller
+                  .jumpTo(_controller.position.maxScrollExtent));
+    });
+    var x = _getResponse();
+    return "Done";
+  }
 }
 
 
