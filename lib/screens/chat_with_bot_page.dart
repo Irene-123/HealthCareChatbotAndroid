@@ -1,7 +1,9 @@
 import 'dart:async';
-
+import 'dart:convert';
 import "package:flutter/material.dart";
 import '../models/chatMessageModel.dart';
+import 'package:health_care_chatbot/function.dart';
+import 'package:http/http.dart' as http;
 
 class ChatWithBotPage extends StatefulWidget {
   const ChatWithBotPage({Key? key}) : super(key: key);
@@ -22,7 +24,9 @@ class _ChatWithBotPageState extends State<ChatWithBotPage> {
   ];
   final textBoxController = TextEditingController();
   final ScrollController _controller = ScrollController();
-
+   String url = 'http://10.0.2.2:5000/api?query=';
+  var data;
+  String output = 'Initial Output';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -116,11 +120,16 @@ class _ChatWithBotPageState extends State<ChatWithBotPage> {
                   Expanded(
                     child: TextField(
                       controller: textBoxController,
+
                       decoration: const InputDecoration(
                           hintText: "Write message...",
                           hintStyle: TextStyle(color: Colors.black54),
                           border: InputBorder.none
                       ),
+                      textInputAction: TextInputAction.send,
+                      onSubmitted: (msg){
+                        output=this._getResponse();
+                      },
                     ),
                   ),
                   const SizedBox(width: 15,),
@@ -131,6 +140,18 @@ class _ChatWithBotPageState extends State<ChatWithBotPage> {
                             ChatMessage(
                                 messageContent: textBoxController.text,
                                 messageType: "sender"
+                            )
+                        );
+                        Timer(
+                            Duration(milliseconds: 300),
+                                () => _controller
+                                .jumpTo(_controller.position.maxScrollExtent));
+                      });
+                      setState(() {
+                        messages.add(
+                            ChatMessage(
+                                messageContent: output,
+                                messageType: "receiver"
                             )
                         );
                         Timer(
@@ -153,4 +174,26 @@ class _ChatWithBotPageState extends State<ChatWithBotPage> {
       ),
     );
   }
+
+  String _getResponse(){
+    if (textBoxController.text.length>0){
+      data= textBoxController.text;
+      url = 'http://10.0.2.2:5000/api?query=' + data.toString();
+      data =  fetchdata(url);
+      var decoded = jsonDecode(data);
+      output = decoded['output'];
+      setState(() {
+        messages.add(
+            ChatMessage(
+                messageContent: output,
+                messageType: "receiver"
+            )
+        );
+      });
+    }
+    return output;
+  }
+
 }
+
+
