@@ -2,6 +2,9 @@
 
 Healthcare chatbot that simulates one on one conversation with users and helps to diagnose there diseases.
 
+# My contributions to the repository for Back end model using knowledge Graphs & NLU. 
+- [Reply to the user their probable diseases and nearest doctors](https://github.com/xzaviourr/HealthcareChatbot)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
