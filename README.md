@@ -14,3 +14,10 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+## User can ask for probable diseases based on their symptoms. 
+
+![image](https://user-images.githubusercontent.com/58950467/162941682-fa413e6f-f087-492e-86e8-2f65a1de1727.png)
+
+The underlying back end process can also suggest user the best foods, drugs, and the type of disease it could be. 
